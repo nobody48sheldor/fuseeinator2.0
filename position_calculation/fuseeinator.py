@@ -7,7 +7,7 @@ m = 1.2
 mp = 0.8
 fp = 400
 tp = 1
-Cz = 0.08
+Cz = 0.75
 K = 0.5
 rho = 1.293
 r = 0.05
@@ -20,7 +20,7 @@ n = 100000
 dt = 1/10000
 dt_ = 1/25
 
-def vfp():
+def vfp_():
     i = 1
     m_ = m + mp
     v = 0.00000001
@@ -46,7 +46,7 @@ def ho():
         i = i + 1
     return(ho)
 
-vfp = vfp()
+vfp = vfp_()
 ho = ho()
 
 def high(vfp, dt):
@@ -59,6 +59,15 @@ def high(vfp, dt):
         H.append(h)
         t = t + dt
     return(H)
+
+def highmax(vfp, dt):
+    t = 0
+    h = 0
+    while vfp >= 0:
+        vfp = vfp + dt*(-(k/m)*(vfp**3/abs(vfp))-g)
+        h = h + vfp*dt
+        t = t + dt
+    return(h)
 
 def speed(vfp, dt):
     t = tp
@@ -93,6 +102,17 @@ ax2.set_ylabel("speed (m/s)")
 ax2.set_title("speed")
 plt.show()
 
+H = []
+VFP = []
+fp = 10
+while fp < 1000:
+    v = vfp_()
+    H.append(highmax(v, dt_))
+    VFP.append(v)
+    fp = fp + 5
+
+plt.plot(VFP, H)
+plt.show()
 
 plt.figure()
 plt.ion()
