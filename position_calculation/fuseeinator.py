@@ -1,5 +1,6 @@
 import matplotlib.pyplot as plt
 import numpy as np
+from mpl_toolkits.mplot3d import Axes3D
 from math import *
 
 g = 9.8
@@ -104,14 +105,19 @@ plt.show()
 
 H = []
 VFP = []
+FP = []
 fp = 10
 while fp < 1000:
     v = vfp_()
     H.append(highmax(v, dt_))
     VFP.append(v)
+    FP.append(fp)
     fp = fp + 5
 
-plt.plot(VFP, H)
+fig = plt.figure()
+ax = fig.add_subplot(111, projection='3d')
+
+ax.plot(VFP, FP, H)
 plt.show()
 
 plt.figure()
