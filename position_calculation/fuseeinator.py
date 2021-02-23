@@ -20,17 +20,17 @@ zo = np.zeros(len(h_))
 
 ymax = max(h)
 
-print(vfp, ymax, dt*len(h))
 
-fig, (ax1, ax2) = plt.subplots(1,2)
-ax1.plot(t, h, color = 'blue')
-ax1.set_xlabel("time (s)")
-ax1.set_ylabel("hight")
-ax1.set_title("position (m)")
-ax2.plot(t, v, color = 'red')
-ax2.set_xlabel("time (s)")
-ax2.set_ylabel("speed (m/s)")
-ax2.set_title("speed")
+W = func.highC(200)
+C_ = W[0]
+T_ = W[1]
+HI_ = W[2]
+
+
+fig2 = plt.figure()
+ax = fig2.add_subplot(111, projection='3d')
+
+ax.plot_surface(C_, T_, HI_)
 plt.show()
 
 R = func.hmax()
@@ -43,6 +43,19 @@ fig = plt.figure()
 ax = fig.add_subplot(111, projection='3d')
 
 ax.plot(VFP, FP, H)
+plt.show()
+
+print(vfp, ymax, dt*len(h))
+
+fig, (ax1, ax2) = plt.subplots(1,2)
+ax1.plot(t, h, color = 'blue')
+ax1.set_xlabel("time (s)")
+ax1.set_ylabel("hight")
+ax1.set_title("position (m)")
+ax2.plot(t, v, color = 'red')
+ax2.set_xlabel("time (s)")
+ax2.set_ylabel("speed (m/s)")
+ax2.set_title("speed")
 plt.show()
 
 plt.figure()
