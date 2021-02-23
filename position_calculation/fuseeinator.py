@@ -21,16 +21,11 @@ zo = np.zeros(len(h_))
 ymax = max(h)
 
 
-W = func.highC(200)
+W = func.highC(1000)
 C_ = W[0]
-T_ = W[1]
-HI_ = W[2]
+HI_ = W[1]
 
-
-fig2 = plt.figure()
-ax = fig2.add_subplot(111, projection='3d')
-
-ax.plot_surface(C_, T_, HI_)
+plt.plot(C_, HI_)
 plt.show()
 
 R = func.hmax()

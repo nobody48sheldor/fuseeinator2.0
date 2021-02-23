@@ -32,6 +32,20 @@ def vfp_(n, fp):
         i = i + 1
     return(v)
 
+def vfpc(n, fp, Cz):
+    i = 1
+    m_ = m + mp
+    v = 0.00000001
+    ho = 0
+    k = (Cz * K * rho * S)
+    while i < n+1:
+        m_ = m_ - (mp/n)
+        v = v + ((fp*(tp/(n))*i)/m_) * np.log(1 + (mp/n)/m_) + (tp/n)*(-(k/m_)*(v**3/abs(v))-g)
+        s = (fp*tp)/m * np.log((m+mp)/m) - g*tp
+        ho = ho + v* (tp/n)
+        i = i + 1
+    return(v)
+
 def ho_(n):
     i = 1
     m_ = m + mp
@@ -68,27 +82,15 @@ def highmax(vfp, dt):
         t = t + dt
     return(h)
 
-def highT(vfp, dt):
-    t = tp
-    h = ho
-    while h >= 0:
+def highmaxC(vfp, dt, Cz):
+    t = 0
+    h = 0
+    k = (Cz * K * rho * S)
+    while vfp >= 0:
         vfp = vfp + dt*(-(k/m)*(vfp**3/abs(vfp))-g)
         h = h + vfp*dt
         t = t + dt
-    return(t)
-
-def highTime(vfp, dt, tmax, Cz):
-    t = tp
-    h = ho
-    H = []
-    while t >= tmax:
-        vfp = vfp + dt*(-(k/m)*(vfp**3/abs(vfp))-g)
-        h = h + vfp*dt
-        if h < 0:
-            h = 0
-        H.append(h)
-        t = t + dt
-    return(H)
+    return(h)
 
 def speed(vfp, dt):
     t = tp
@@ -122,28 +124,16 @@ def hmax():
 
 def highC(n):
     dt = 1/n
-    Cz = 0
-    vfp = vfp_(n, 400)
-    tmax = highT(vfp, dt)
-    S = len(highTime(vfp, dt, tmax, Cz))
     c = np.linspace(0, 1.1, n)
-    C = []
-    H = []
     R = []
-    T = []
+    H = []
     i = 0
     while i < n:
-        Cz = c[i]
-        C.append(np.linspace(c[i], c[i], S))
-        h = highTime(vfp, dt, tmax, Cz)
+        C = c[i]
+        vfp = vfpc(n, 400, C)
+        h = highmaxC(vfp, dt, C)
         H.append(h)
-        t = np.linspace(0, tmax, S)
-        T.append(t)
         i = i + 1
-        if i%2 == 0:
-            print((i/2), "%")
-    R.append(C)
-    R.append(T)
+    R.append(c)
     R.append(H)
-    print(R[1][0])
     return(R)
