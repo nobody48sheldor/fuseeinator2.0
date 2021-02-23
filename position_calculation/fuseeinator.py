@@ -34,8 +34,6 @@ FP = R[0]
 VFP = R[1]
 H = R[2]
 
-print("debug")
-
 fig = plt.figure()
 ax = fig.add_subplot(111, projection='3d')
 

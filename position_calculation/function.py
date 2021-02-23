@@ -137,4 +137,3 @@ def highC(n):
     R.append(c)
     R.append(H)
     return(R)
-print("debug")
