@@ -26,6 +26,8 @@ C_ = W[0]
 HI_ = W[1]
 
 plt.plot(C_, HI_)
+plt.xlabel('Cx')
+plt.ylabel('hmax (m)')
 plt.show()
 
 R = func.hmax()
@@ -38,14 +40,26 @@ fig = plt.figure()
 ax = fig.add_subplot(111, projection='3d')
 
 ax.plot(VFP, FP, H)
+ax.set_xlabel('vfp (m/s)')
+ax.set_ylabel('fp (N)')
+ax.set_zlabel('hmax (m)')
 plt.show()
 
-print(vfp, ymax, dt*len(h))
+print("empty rocket mass            ", func.m, " (kg)")
+print("fuel mass                    ", func.mp, " (kg)")
+print("upward force                 ", func.fp, " (N)")
+print("propultion time              ", func.tp, " (s)")
+print("coefficient of drag(z)       ", func.Cz)
+print("frotal area                  ", func.S, " (m^2)")
+print("\n")
+print("end propultion speed:        ", vfp, " (m/s)")
+print("max height :                  ", ymax, " (m)")
+print("duration of free flight :    ", dt*len(h), " (s)")
 
 fig, (ax1, ax2) = plt.subplots(1,2)
 ax1.plot(t, h, color = 'blue')
 ax1.set_xlabel("time (s)")
-ax1.set_ylabel("hight")
+ax1.set_ylabel("height")
 ax1.set_title("position (m)")
 ax2.plot(t, v, color = 'red')
 ax2.set_xlabel("time (s)")
