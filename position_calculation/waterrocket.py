@@ -8,8 +8,10 @@ n = 100000
 dt = 1/10000
 dt_ = 1/25
 
-vfp = func.vfp_(n, func.fp)
-ho = func.ho_(n)
+vfp = func.vfpwr_(n, func.Pr)
+print(vfp)
+ho = func.howr_(n)
+print(ho)
 
 h = func.high(vfp, dt)
 h_ = func.high(vfp, dt_)
@@ -21,7 +23,7 @@ zo = np.zeros(len(h_))
 ymax = max(h)
 
 
-W = func.highC(1000)
+W = func.highCwr(1000)
 C_ = W[0]
 HI_ = W[1]
 
@@ -30,25 +32,25 @@ plt.xlabel('Cx')
 plt.ylabel('hmax (m)')
 plt.show()
 
-R = func.hmax()
+R = func.hmaxwr()
 
-FP = R[0]
+P = R[0]
 VFP = R[1]
 H = R[2]
 
 fig = plt.figure()
 ax = fig.add_subplot(111, projection='3d')
 
-ax.plot(VFP, FP, H)
+ax.plot(VFP, P, H)
 ax.set_xlabel('vfp (m/s)')
-ax.set_ylabel('fp (N)')
+ax.set_ylabel('p (Pa)')
 ax.set_zlabel('hmax (m)')
 plt.show()
 
 print("empty rocket mass :          ", func.m, " (kg)")
-print("fuel mass :                  ", func.mp, " (kg)")
-print("upward force :               ", func.fp, " (N)")
-print("propultion time :            ", func.tp, " (s)")
+print("fuel mass :                  ", func.mp_, " (kg)")
+print("pressure :                   ", func.Pr, " (Pa)")
+print("propultion time :            ", func.tpwr, " (s)")
 print("coefficient of drag(z) :     ", func.Cz)
 print("frontal area :               ", func.S, " (m^2)")
 print("\n")
