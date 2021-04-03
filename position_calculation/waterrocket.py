@@ -9,9 +9,7 @@ dt = 1/10000
 dt_ = 1/25
 
 vfp = func.vfpwr_(n, func.Pr)
-print(vfp)
 ho = func.howr_(n)
-print(ho)
 
 h = func.high(vfp, dt)
 h_ = func.high(vfp, dt_)
@@ -27,11 +25,6 @@ W = func.highCwr(1000)
 C_ = W[0]
 HI_ = W[1]
 
-plt.plot(C_, HI_)
-plt.xlabel('Cx')
-plt.ylabel('hmax (m)')
-plt.show()
-
 R = func.hmaxwr()
 
 P = R[0]
@@ -43,7 +36,7 @@ ax = fig.add_subplot(111, projection='3d')
 
 ax.plot(VFP, P, H)
 ax.set_xlabel('vfp (m/s)')
-ax.set_ylabel('p (Pa)')
+ax.set_ylabel('P (Pa)')
 ax.set_zlabel('hmax (m)')
 plt.show()
 
@@ -58,15 +51,25 @@ print("end propultion speed :       ", vfp, " (m/s)")
 print("max height :                 ", ymax, " (m)")
 print("duration of free flight :    ", dt*len(h), " (s)")
 
-fig, (ax1, ax2) = plt.subplots(1,2)
-ax1.plot(t, h, color = 'blue')
-ax1.set_xlabel("time (s)")
-ax1.set_ylabel("height")
-ax1.set_title("position (m)")
-ax2.plot(t, v, color = 'red')
+fig = plt.figure()
+
+ax1 = plt.subplot(212)
+ax1.plot(C_, HI_)
+ax1.set_xlabel('Cx')
+ax1.set_ylabel('hmax (m)')
+
+ax2 = plt.subplot(221)
+ax2.plot(t, h, color = 'blue')
 ax2.set_xlabel("time (s)")
-ax2.set_ylabel("speed (m/s)")
-ax2.set_title("speed")
+ax2.set_ylabel("height")
+ax2.set_title("position (m)")
+
+ax3 = plt.subplot(222)
+ax3.plot(t, v, color = 'red')
+ax3.set_xlabel("time (s)")
+ax3.set_ylabel("speed (m/s)")
+ax3.set_title("speed")
+
 plt.show()
 
 plt.figure()

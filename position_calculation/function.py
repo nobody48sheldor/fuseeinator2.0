@@ -193,7 +193,7 @@ def hmaxwr():
         H.append(highmax(v, dt_))
         VFP.append(v)
         P.append(p)
-        p = p + 2000
+        p = p + 20000
         if p%(20000) == 0:
             print(p/(20000), "%")
     R = []
