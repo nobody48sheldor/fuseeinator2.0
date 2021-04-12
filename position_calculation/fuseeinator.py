@@ -5,17 +5,20 @@ from math import *
 import function as func
 
 n = 100000
-dt = 1/10000
+dt = 1/n
 dt_ = 1/25
 
 vfp = func.vfp_(n, func.fp)
 ho = func.ho_(n)
 
+hprop = func.hvfp_(n, func.fp)
 h = func.high(vfp, dt)
 h_ = func.high(vfp, dt_)
+vprop = func.vvfp_(n, func.fp)
 v = func.speed(vfp, dt)
-t = np.linspace(0, dt*len(h), len(h))
-t_ = np.linspace(0, dt_*len(h_), len(h_))
+tprop = np.linspace(0, func.tp, len(func.hvfp_(n, func.fp)))
+t = np.linspace(func.tp, dt*len(h) + func.tp, len(h))
+t_ = np.linspace(func.tp, dt_*len(h_) + func.tp, len(h_))
 zo = np.zeros(len(h_))
 
 ymax = max(h)
@@ -62,12 +65,14 @@ ax1.set_title("hmax(Cz) [propergol rocket]")
 
 ax2 = plt.subplot(221)
 ax2.plot(t, h, color = 'blue')
+ax2.plot(tprop, hprop, color = 'green')
 ax2.set_xlabel("time (s)")
 ax2.set_ylabel("height (m)")
 ax2.set_title("height [propergol rocket]")
 
 ax3 = plt.subplot(222)
 ax3.plot(t, v, color = 'red')
+ax3.plot(tprop, vprop, color = 'green')
 ax3.set_xlabel("time (s)")
 ax3.set_ylabel("speed (m/s)")
 ax3.set_title("speed [propergol rocket]")

@@ -36,6 +36,35 @@ def vfp_(n, fp):
         i = i + 1
     return(v)
 
+def hvfp_(n, fp):
+    i = 1
+    m_ = m + mp
+    v = 0.00000001
+    ho = 0
+    H = []
+    while i < n+1:
+        m_ = m_ - (mp/n)
+        v = v + ((fp*(tp/(n))*i)/m_) * np.log(1 + (mp/n)/m_) + (tp/n)*(-(k/m_)*(v**3/abs(v))-g)
+        ho = ho + v* (tp/n)
+        H.append(ho)
+        i = i + 1
+    return(H)
+
+def vvfp_(n, fp):
+    i = 1
+    m_ = m + mp
+    v = 0.00000001
+    ho = 0
+    V = []
+    while i < n+1:
+        m_ = m_ - (mp/n)
+        v = v + ((fp*(tp/(n))*i)/m_) * np.log(1 + (mp/n)/m_) + (tp/n)*(-(k/m_)*(v**3/abs(v))-g)
+        ho = ho + v* (tp/n)
+        V.append(v)
+        i = i + 1
+    return(V)
+
+
 def vfpc(n, fp, C):
     i = 1
     m_ = m + mp
@@ -58,7 +87,7 @@ def vfpcwr(n, P, C):
     while i < n+1:
         m_ = m_ - (mp_/n)
         v = v + np.sqrt(2*P/rhoH) * np.log(1 + (mp_/n)/m_) + (((mp_/rhoH)/(np.sqrt(2*Pr/rhoH)*1.4))/n)*(-(k/m_)*(v**3/abs(v))-g)
-        ho = ho + v* (((mp_/rhoH)/(np.sqrt(2*Pr/rhoH)*1.4))/n)
+        ho = ho + v* (((mp_/rhoH)/(np.sqrt(2*Pr/rhoH)*np.pi*((r/2)**2)))/n)
         i = i + 1
     return(v)
 
@@ -70,9 +99,37 @@ def vfpwr_(n, P):
     while i < n+1:
         m_ = m_ - (mp_/n)
         v = v + np.sqrt(2*P/rhoH) * np.log(1 + (mp_/n)/m_) + (((mp_/rhoH)/(np.sqrt(2*Pr/rhoH)*1.4))/n)*(-(k/m_)*(v**3/abs(v))-g)
-        ho = ho + v* (((mp_/rhoH)/(np.sqrt(2*Pr/rhoH)*1.4))/n)
+        ho = ho + v* (((mp_/rhoH)/(np.sqrt(2*Pr/rhoH)*np.pi*((r/2)**2)))/n)
         i = i + 1
     return(v)
+
+def hvfpwr_(n, P):
+    i = 1
+    m_ = m + mp_
+    v = 0.00000001
+    ho = 0
+    H = []
+    while i < n+1:
+        m_ = m_ - (mp_/n)
+        v = v + np.sqrt(2*P/rhoH) * np.log(1 + (mp_/n)/m_) + (((mp_/rhoH)/(np.sqrt(2*Pr/rhoH)*1.4))/n)*(-(k/m_)*(v**3/abs(v))-g)
+        ho = ho + v* (((mp_/rhoH)/(np.sqrt(2*Pr/rhoH)*np.pi*((r/2)**2)))/n)
+        H.append(ho)
+        i = i + 1
+    return(H)
+
+def vvfpwr_(n, P):
+    i = 1
+    m_ = m + mp_
+    v = 0.00000001
+    ho = 0
+    V = []
+    while i < n+1:
+        m_ = m_ - (mp_/n)
+        v = v + np.sqrt(2*P/rhoH) * np.log(1 + (mp_/n)/m_) + (((mp_/rhoH)/(np.sqrt(2*Pr/rhoH)*1.4))/n)*(-(k/m_)*(v**3/abs(v))-g)
+        ho = ho + v* (((mp_/rhoH)/(np.sqrt(2*Pr/rhoH)*np.pi*((r/2)**2)))/n)
+        V.append(v)
+        i = i + 1
+    return(V)
 
 def ho_(n):
     i = 1
@@ -94,7 +151,7 @@ def howr_(n):
     while i < n+1:
         m_ = m_ - (mp_/n)
         v = v + np.sqrt(2*Pr/rhoH) * np.log(1 + (mp_/n)/m_) + (((mp_/rhoH)/(np.sqrt(2*Pr/rhoH)*1.4))/n)*(-(k/m_)*(v**3/abs(v))-g)
-        ho = ho + v* (((mp_/rhoH)/(np.sqrt(2*Pr/rhoH)*1.4))/n)
+        ho = ho + v* (((mp_/rhoH)/(np.sqrt(2*Pr/rhoH)*np.pi*((r/2)**2)))/n)
         i = i + 1
     return(ho)
 

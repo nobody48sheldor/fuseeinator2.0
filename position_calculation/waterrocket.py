@@ -5,17 +5,20 @@ from math import *
 import function as func
 
 n = 100000
-dt = 1/10000
+dt = 1/n
 dt_ = 1/25
 
 vfp = func.vfpwr_(n, func.Pr)
 ho = func.howr_(n)
 
-h = func.high(vfp, dt)
-h_ = func.high(vfp, dt_)
-v = func.speed(vfp, dt)
-t = np.linspace(0, dt*len(h), len(h))
-t_ = np.linspace(0, dt_*len(h_), len(h_))
+hprop = func.hvfpwr_(n, func.Pr)
+h = func.highwr(vfp, dt)
+h_ = func.highwr(vfp, dt_)
+vprop = func.vvfpwr_(n, func.Pr)
+v = func.speedwr(vfp, dt)
+tprop = np.linspace(0, func.tpwr, len(func.hvfpwr_(n, func.Pr)))
+t = np.linspace(func.tpwr, dt*len(h) + func.tpwr, len(h))
+t_ = np.linspace(func.tpwr, dt_*len(h_) + func.tpwr, len(h_))
 zo = np.zeros(len(h_))
 
 ymax = max(h)
@@ -62,12 +65,14 @@ ax1.set_title("hmax(Cz) [water rocket]")
 
 ax2 = plt.subplot(221)
 ax2.plot(t, h, color = 'blue')
+ax2.plot(tprop, hprop, color = 'green')
 ax2.set_xlabel("time (s)")
 ax2.set_ylabel("height (m)")
 ax2.set_title("height [water rocket]")
 
 ax3 = plt.subplot(222)
 ax3.plot(t, v, color = 'red')
+ax3.plot(tprop, vprop, color = 'green')
 ax3.set_xlabel("time (s)")
 ax3.set_ylabel("speed (m/s)")
 ax3.set_title("speed [water rocket]")
