@@ -1,8 +1,11 @@
 import matplotlib.pyplot as plt
 import numpy as np
 from mpl_toolkits.mplot3d import Axes3D
+from matplotlib import style
 from math import *
 import function as func
+
+style.use('dark_background')
 
 n = 100000
 dt = 1/n
@@ -34,15 +37,6 @@ FP = R[0]
 VFP = R[1]
 H = R[2]
 
-fig = plt.figure()
-ax = fig.add_subplot(111, projection='3d')
-
-ax.plot(VFP, FP, H)
-ax.set_xlabel('end propultion velocity (m/s)')
-ax.set_ylabel('propulsion force (N)')
-ax.set_zlabel('max height (m)')
-ax.set_title("height depending on end propulsion velocity and propulsion force [propergol rocket]")
-plt.show()
 
 print("empty rocket mass :          ", func.m, " (kg)")
 print("fuel mass :                  ", func.mp, " (kg)")
@@ -55,40 +49,49 @@ print("end propultion speed :       ", vfp, " (m/s)")
 print("max height :                 ", ymax, " (m)")
 print("duration of free flight :    ", dt*len(h), " (s)")
 
+input("\\\\")
+
+plt.ion()
 fig = plt.figure()
 
-ax1 = plt.subplot(212)
-ax1.plot(C_, HI_)
-ax1.set_xlabel('drag coefficient')
-ax1.set_ylabel('max height (m)')
-ax1.set_title("hmax(Cz) [propergol rocket]")
+ax1 = plt.subplot2grid((3,3), (0,0), rowspan=2, colspan= 2, projection = '3d')
+ax3 = plt.subplot2grid((3,3), (0,2), rowspan=1, colspan= 1)
+ax4 = plt.subplot2grid((3,3), (1,2), rowspan=1, colspan= 1)
+ax2 = plt.subplot2grid((3,3), (2,0), rowspan=1, colspan= 2)
+ax5 = plt.subplot2grid((3,3), (2,2), rowspan=1, colspan= 1)
 
-ax2 = plt.subplot(221)
-ax2.plot(t, h, color = 'blue')
-ax2.plot(tprop, hprop, color = 'green')
-ax2.set_xlabel("time (s)")
-ax2.set_ylabel("height (m)")
-ax2.set_title("height [propergol rocket]")
+ax1.plot(VFP, FP, H, color = 'yellow')
+ax1.set_xlabel('end propultion velocity (m/s)')
+ax1.set_ylabel('propulsion force (N)')
+ax1.set_zlabel('max height (m)')
+ax1.set_title("height depending on end propulsion velocity and propulsion force [propergol rocket]")
 
-ax3 = plt.subplot(222)
-ax3.plot(t, v, color = 'red')
-ax3.plot(tprop, vprop, color = 'green')
+ax2.plot(C_, HI_, color = 'red')
+ax2.set_xlabel('drag coefficient')
+ax2.set_ylabel('max height (m)')
+ax2.set_title("hmax(Cz) [propergol rocket]")
+
+ax3.plot(t, h, color = 'blue')
+ax3.plot(tprop, hprop, color = 'green')
 ax3.set_xlabel("time (s)")
-ax3.set_ylabel("speed (m/s)")
-ax3.set_title("speed [propergol rocket]")
+ax3.set_ylabel("height (m)")
+ax3.set_title("height [propergol rocket]")
 
-plt.show()
-
-plt.figure()
-plt.ion()
-plt.scatter([], [])
+ax4.plot(t, v, color = 'red')
+ax4.plot(tprop, vprop, color = 'green')
+ax4.set_xlabel("time (s)")
+ax4.set_ylabel("speed (m/s)")
+ax4.set_title("speed [propergol rocket]")
 
 i = 0
 while i < len(h_):
-    plt.clf()
-    plt.xlim([-1, 1])
-    plt.ylim([0, ymax + 50])
-    plt.scatter(zo[i], h_[i])
-    plt.title("time = {}" .format(t_[i]))
+    ax5.clear()
+    ax5.set_xlim([-1, 1])
+    ax5.set_ylim([0, ymax + 50])
+    ax5.scatter(zo[i], h_[i], color = 'green')
+    ax5.set_title("time = {}" .format(t_[i]))
+
+    if i + 2 == len(h_):
+        dt = 100000
     i = i + 1
     plt.pause(dt)
