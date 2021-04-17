@@ -1,5 +1,6 @@
 from math import *
 import numpy as np
+from functools import cache
 
 g = 9.8
 m = 1.2
@@ -158,6 +159,7 @@ def howr_(n):
 ho = ho_(n)
 howr = howr_(n)
 
+@cache
 def high(vfp, dt):
     t = tp
     h = ho
@@ -169,6 +171,7 @@ def high(vfp, dt):
         t = t + dt
     return(H)
 
+@cache
 def highwr(vfp, dt):
     t = tpwr
     h = howr
@@ -221,6 +224,7 @@ def speedwr(vfp, dt):
         t = t + dt
     return(V)
 
+@cache
 def hmax():
     H = []
     VFP = []
@@ -240,6 +244,7 @@ def hmax():
     R.append(H)
     return(R)
 
+@cache
 def hmaxwr():
     H = []
     VFP = []
