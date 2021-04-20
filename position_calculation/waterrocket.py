@@ -19,9 +19,9 @@ def main():
 
     executor = ProcessPoolExecutor(max_workers=10)
 
-    p1 = executor.submit(func.hvfpwr_, n, func.fp)
+    p1 = executor.submit(func.hvfpwr_, n, func.Pr)
     p2 = executor.submit(func.highwr, vfp, dt)
-    p3 = executor.submit(func.vvfpwr_, n, func.fp)
+    p3 = executor.submit(func.vvfpwr_, n, func.Pr)
     p4 = executor.submit(func.speedwr, vfp, dt)
     p5 = executor.submit(func.hmaxwr)
 
