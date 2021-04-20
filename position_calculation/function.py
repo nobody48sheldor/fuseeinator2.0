@@ -37,6 +37,7 @@ def vfp_(n, fp):
         i = i + 1
     return(v)
 
+@cache
 def hvfp_(n, fp):
     i = 1
     m_ = m + mp
@@ -51,6 +52,7 @@ def hvfp_(n, fp):
         i = i + 1
     return(H)
 
+@cache
 def vvfp_(n, fp):
     i = 1
     m_ = m + mp
@@ -92,6 +94,7 @@ def vfpcwr(n, P, C):
         i = i + 1
     return(v)
 
+@cache
 def vfpwr_(n, P):
     i = 1
     m_ = m + mp_
@@ -104,6 +107,7 @@ def vfpwr_(n, P):
         i = i + 1
     return(v)
 
+@cache
 def hvfpwr_(n, P):
     i = 1
     m_ = m + mp_
