@@ -7,7 +7,7 @@ FUSEEINATOR is a project that 1 started about a year and an half ago, the aim of
 ## code
 the aim of the code was first to solve the differential equation numerically, but then I started making plot and stuff with it, and now it allows me to test differents very precise parameters
 
-[![FUSEEINATOR](https://i.ytimg.com/vi/mudVmDJg3S4/hq720.jpg?sqp=-oaymwEcCNAFEJQDSFXyq4qpAw4IARUAAIhCGAFwAcABBg==&rs=AOn4CLCUdfdFchqmfkJLFE2c8RZI3vwzTQ)](https://www.youtube.com/watch?v=mudVmDJg3S4)
+[![FUSEEINATOR](https://cdn.discordapp.com/attachments/748653688515592332/833870196992114768/unknown.png)](https://www.youtube.com/watch?v=TpVJ4x1Fdtk)
 ## building
 I think that I have an advanced enough code to know what should I build, the shape, the propellant, the size... . I should start to build it, and make tests this summer (2021).
 ![](https://cdn.discordapp.com/attachments/748653688515592332/827253419261296671/rocket.png)
