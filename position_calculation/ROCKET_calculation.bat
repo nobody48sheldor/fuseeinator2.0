@@ -75,7 +75,7 @@ ECHO * --                            pressure =                                 
 ECHO * --                        rhoP(kg/m^3) =                                  -- *
 ECHO * --                                  Cz =                                  -- *
 ECHO * ---------------------------------------------------------------------------- *
-ECHO enter parameters
+ECHO enter parameters (separator is "/")
 SET /p pwr=-
 ECHO %pwr% > wr.txt
 cls

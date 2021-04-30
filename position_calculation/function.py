@@ -4,11 +4,8 @@ from functools import cache
 
 with open("type.txt", "r") as type_doc:
     type = type_doc.read()
-    print(type)
 
 type = int(type[0])
-
-Cz = 0.7
 
 with open("fi.txt", "r") as fi_doc:
     FI = fi_doc.read().split("/")
