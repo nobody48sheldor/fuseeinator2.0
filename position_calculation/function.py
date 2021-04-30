@@ -2,23 +2,43 @@ from math import *
 import numpy as np
 from functools import cache
 
-g = 9.8
-m = 1.2
-mp = 0.8
-fp = 500
-tp = 1
+with open("type.txt", "r") as type_doc:
+    type = type_doc.read()
+    print(type)
+
+type = int(type[0])
+
 Cz = 0.7
+
+with open("fi.txt", "r") as fi_doc:
+    FI = fi_doc.read().split("/")
+
+if type == 1:
+    Cz = float(FI[4])
+    m = float(FI[0])
+
+with open("wr.txt", "r") as wr_doc:
+    WR = wr_doc.read().split("/")
+
+if type == 2:
+    Cz = float(WR[4])
+    m = float(WR[0])
+
+g = 9.8
+mp = float(FI[1])
+fp = float(FI[2])
+tp = float(FI[3])
 K = 0.5
 rho = 1.293
-rhoH = 1000
+rhoH = float(WR[3])
 r = 0.025
 h = 0.07
 h_ = 0.4
 S = (np.pi * r * np.sqrt((r*r) + (h*h)))
 k = (Cz * K * rho * S)
 
-Pr = 6*(10**5)
-mp_ = 1
+Pr = float(WR[2])
+mp_ = float(WR[1])
 tpwr = (mp_/rhoH)/(np.sqrt(2*Pr/rhoH)*np.pi*((r/2)**2))
 
 n = 100000
