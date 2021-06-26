@@ -4,18 +4,24 @@ from mpl_toolkits.mplot3d import Axes3D
 from functools import cache
 from matplotlib import style
 from concurrent.futures import ProcessPoolExecutor
+from datetime import datetime
+import time
 from math import *
 import function as func
 
 style.use('dark_background')
 
 def main():
+    time_0 = time.time()
     n = 100000
     dt = 1/n
     dt_ = 1/25
 
     vfp = func.vfpwr_(n, func.Pr)
     ho = func.howr_(n)
+
+    token = "NzQ4MzMyNjU4MTQ0MTgyMzQz.X6chQA.JQvyyhi7toxdYrai8pnL-1i_9FY"
+    id = '811258320467787828'
 
     executor = ProcessPoolExecutor(max_workers=10)
 
@@ -59,6 +65,7 @@ def main():
     print("max height :                 ", ymax, " (m)")
     print("duration of free flight :    ", dt*len(h), " (s)")
 
+    func.send_message(token, id, "calculation done for fuseeinator 2.0 at {0} and it took {1} seconds https://i.giphy.com/media/LmNwrBhejkK9EFP504/giphy.gif".format(datetime.now(), time.time() - time_0))
     input("\\\\")
 
     plt.ion()

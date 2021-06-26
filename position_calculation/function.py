@@ -1,6 +1,17 @@
 from math import *
 import numpy as np
 from functools import cache
+from numba import jit
+import requests
+
+token = "NzQ4MzMyNjU4MTQ0MTgyMzQz.X6chQA.JQvyyhi7toxdYrai8pnL-1i_9FY"
+id = '811258320467787828'
+
+def send_message(token, id, msg):
+    message = {"content": msg, "nonce": id, "tts": False}
+    header = {"authorization": token}
+    url = 'https://discord.com/api/v9/channels/{}/messages'.format(id)
+    requests.post(url, data = message, headers = header)
 
 with open("type.txt", "r") as type_doc:
     type = type_doc.read()
