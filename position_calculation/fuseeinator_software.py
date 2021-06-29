@@ -156,9 +156,11 @@ class Ui_MainWindow(object):
 
         self.actionupdate = QtWidgets.QAction(MainWindow)
         self.actionupdate.setObjectName("actionupdate")
+        self.actiongit_push.triggered.conect(self.git_pull)
 
         self.actiongit_push = QtWidgets.QAction(MainWindow)
         self.actiongit_push.setObjectName("actiongit_push")
+        self.actiongit_push.triggered.connect(self.git_push)
 
         self.actionLoad_File = QtWidgets.QAction(MainWindow)
         self.actionLoad_File.setObjectName("actionLoad_File")
@@ -236,6 +238,13 @@ class Ui_MainWindow(object):
             self.label_4.setText("pressure (pascal)")
             self.label_5.setText("rho (kg/m^3)")
             self.label_6.setText("Cz aerodynamic")
+
+    def git_pull(self):
+        os.startfile(git_pull.bat)
+
+    def git_pull(self):
+        os.startfile(git_push.bat)
+
 if __name__ == "__main__":
     import sys
     app = QtWidgets.QApplication(sys.argv)
