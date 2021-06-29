@@ -12,7 +12,7 @@ class Ui_MainWindow(object):
         MainWindow.setFont(font)
         MainWindow.setCursor(QtGui.QCursor(QtCore.Qt.ArrowCursor))
         icon = QtGui.QIcon()
-        icon.addPixmap(QtGui.QPixmap("../../../../../../img/fusee_propergol.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
+        icon.addPixmap(QtGui.QPixmap("icon_software.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
         MainWindow.setWindowIcon(icon)
         MainWindow.setAutoFillBackground(False)
         MainWindow.setStyleSheet("background-color: rgb(17, 17, 17);\n"
@@ -156,21 +156,22 @@ class Ui_MainWindow(object):
 
         self.actionupdate = QtWidgets.QAction(MainWindow)
         self.actionupdate.setObjectName("actionupdate")
-        self.actionupdate.triggered.connect(self.git_pull)
+        self.actionupdate.triggered.connect(lambda: self.git_pull())
 
         self.actiongit_push = QtWidgets.QAction(MainWindow)
         self.actiongit_push.setObjectName("actiongit_push")
-        self.actiongit_push.triggered.connect(self.git_push)
+        self.actiongit_push.triggered.connect(lambda: self.git_push())
 
         self.actionLoad_File = QtWidgets.QAction(MainWindow)
         self.actionLoad_File.setObjectName("actionLoad_File")
 
         self.actionExit = QtWidgets.QAction(MainWindow)
         self.actionExit.setObjectName("actionExit")
-        self.actiongit_push.triggered.connect(self.install_packages)
+        self.actionExit.triggered.connect(lambda: self.install_packages())
 
         self.actionExit_2 = QtWidgets.QAction(MainWindow)
         self.actionExit_2.setObjectName("actionExit_2")
+        self.actionExit_2.triggered.connect(lambda: self.exit())
 
         self.menuSettings.addAction(self.actionupdate)
         self.menuSettings.addAction(self.actiongit_push)
@@ -241,13 +242,16 @@ class Ui_MainWindow(object):
             self.label_6.setText("Cz aerodynamic")
 
     def git_pull(self):
-        os.startfile(git_pull.bat)
+        os.startfile("git_pull.bat")
 
     def git_push(self):
-        os.startfile(git_push.bat)
+        os.startfile("git_push.bat")
 
     def install_packages(self):
-        os.startfile(packages.bat)
+        os.startfile("packages.bat")
+
+    def exit(self):
+        sys.exit(app.exec_())
 
 if __name__ == "__main__":
     import sys
