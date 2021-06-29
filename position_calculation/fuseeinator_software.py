@@ -82,7 +82,7 @@ class Ui_MainWindow(object):
         self.label_4.setObjectName("label_4")
 
         self.label_5 = QtWidgets.QLabel(self.centralwidget)
-        self.label_5.setGeometry(QtCore.QRect(300, 470, 420, 51))
+        self.label_5.setGeometry(QtCore.QRect(290, 470, 420, 51))
         font = QtGui.QFont()
         font.setFamily("Insaniburger")
         font.setPointSize(28)
@@ -156,7 +156,7 @@ class Ui_MainWindow(object):
 
         self.actionupdate = QtWidgets.QAction(MainWindow)
         self.actionupdate.setObjectName("actionupdate")
-        self.actiongit_push.triggered.conect(self.git_pull)
+        self.actionupdate.triggered.connect(self.git_pull)
 
         self.actiongit_push = QtWidgets.QAction(MainWindow)
         self.actiongit_push.setObjectName("actiongit_push")
@@ -167,6 +167,7 @@ class Ui_MainWindow(object):
 
         self.actionExit = QtWidgets.QAction(MainWindow)
         self.actionExit.setObjectName("actionExit")
+        self.actiongit_push.triggered.connect(self.install_packages)
 
         self.actionExit_2 = QtWidgets.QAction(MainWindow)
         self.actionExit_2.setObjectName("actionExit_2")
@@ -231,7 +232,7 @@ class Ui_MainWindow(object):
     def type(self):
         if self.comboBox.currentIndex() == 0:
             self.label_4.setText("propellant mass")
-            self.label_5.setText("propuslsion force")
+            self.label_5.setText("propulsion force")
             self.label_6.setText("propulsion time")
 
         if self.comboBox.currentIndex() == 1:
@@ -244,6 +245,9 @@ class Ui_MainWindow(object):
 
     def git_push(self):
         os.startfile(git_push.bat)
+
+    def install_packages(self):
+        os.startfile(packages.bat)
 
 if __name__ == "__main__":
     import sys
