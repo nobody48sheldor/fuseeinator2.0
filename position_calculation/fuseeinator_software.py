@@ -242,7 +242,7 @@ class Ui_MainWindow(object):
     def git_pull(self):
         os.startfile(git_pull.bat)
 
-    def git_pull(self):
+    def git_push(self):
         os.startfile(git_push.bat)
 
 if __name__ == "__main__":
