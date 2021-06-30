@@ -82,7 +82,7 @@ class Ui_MainWindow(object):
         self.label_4.setObjectName("label_4")
 
         self.label_5 = QtWidgets.QLabel(self.centralwidget)
-        self.label_5.setGeometry(QtCore.QRect(290, 470, 420, 51))
+        self.label_5.setGeometry(QtCore.QRect(235, 470, 475, 51))
         font = QtGui.QFont()
         font.setFamily("Insaniburger")
         font.setPointSize(28)
@@ -193,7 +193,7 @@ class Ui_MainWindow(object):
         self.label_2.setText(_translate("MainWindow", "Type"))
         self.label_3.setText(_translate("MainWindow", "empty mass"))
         self.label_4.setText(_translate("MainWindow", "propellant mass"))
-        self.label_5.setText(_translate("MainWindow", "propulsion force"))
+        self.label_5.setText(_translate("MainWindow", "propulsion force kN"))
         self.label_6.setText(_translate("MainWindow", "propulsion time"))
         self.checkBox.setText(_translate("MainWindow", "Use Setting"))
 
@@ -205,6 +205,7 @@ class Ui_MainWindow(object):
         self.actiongit_push.setStatusTip(_translate("MainWindow", "push to the github repository your parametters"))
         self.actiongit_push.setShortcut(_translate("MainWindow", "Ctrl+P"))
         self.actionLoad_File.setText(_translate("MainWindow", "Load File"))
+        self.actionLoad_File.setStatusTip(_translate("MainWindow", "Load a File for setting (not yet implemented)"))
         self.actionExit.setText(_translate("MainWindow", "Install Packages"))
         self.actionExit_2.setText(_translate("MainWindow", "Exit"))
 
@@ -213,14 +214,14 @@ class Ui_MainWindow(object):
             if self.comboBox.currentIndex() == 0:
                 with open("fi.txt", "w+") as propergol:
                     propergol.write("{}/".format(self.doubleSpinBox.value()))
-                    propergol.write("{}/".format(self.doubleSpinBox_2.value()))
+                    propergol.write("{}/".format(self.doubleSpinBox_2.value()*10000))
                     propergol.write("{}/".format(self.doubleSpinBox_3.value()))
                     propergol.write("{}/0.6".format(self.doubleSpinBox_4.value()))
             if self.comboBox.currentIndex() == 1:
                 with open("wr.txt", "w+") as waterrocket:
                     waterrocket.write("{}/".format(self.doubleSpinBox.value()))
                     waterrocket.write("{}/".format(self.doubleSpinBox_2.value()))
-                    waterrocket.write("{}/".format(self.doubleSpinBox_3.value()))
+                    waterrocket.write("{}/".format(self.doubleSpinBox_3.value())*1000)
                     waterrocket.write("{}/0.6".format(self.doubleSpinBox_4.value()))
 
         if self.comboBox.currentIndex() == 0:
@@ -233,13 +234,17 @@ class Ui_MainWindow(object):
     def type(self):
         if self.comboBox.currentIndex() == 0:
             self.label_4.setText("propellant mass")
-            self.label_5.setText("propulsion force")
+            self.label_4.setGeometry(QtCore.QRect(310, 360, 400, 51))
+            self.label_5.setText("propulsion force kN")
             self.label_6.setText("propulsion time")
+            self.label_5.setGeometry(QtCore.QRect(235, 470, 475, 51))
 
         if self.comboBox.currentIndex() == 1:
-            self.label_4.setText("pressure (pascal)")
+            self.label_4.setText("pressure (hPa)")
+            self.label_4.setGeometry(QtCore.QRect(345, 360, 400, 51))
             self.label_5.setText("rho (kg/m^3)")
             self.label_6.setText("Cz aerodynamic")
+            self.label_5.setGeometry(QtCore.QRect(350, 470, 450, 51))
 
     def git_pull(self):
         os.startfile("git_pull.bat")
