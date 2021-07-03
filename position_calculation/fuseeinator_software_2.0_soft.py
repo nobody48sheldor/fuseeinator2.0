@@ -1,5 +1,6 @@
 from PyQt5 import QtCore, QtGui, QtWidgets
 import os
+import sys
 import matplotlib.pyplot as plt
 import numpy as np
 from mpl_toolkits.mplot3d import Axes3D
@@ -45,6 +46,7 @@ def vfp_(n, fp, m, mp, tp):
         i = i + 1
     return(v)
 
+@cache
 def hvfp_(n, fp, m, mp, tp):
     i = 1
     m_ = m + mp
@@ -59,6 +61,7 @@ def hvfp_(n, fp, m, mp, tp):
         i = i + 1
     return(H)
 
+@cache
 def vvfp_(n, fp, m, mp, tp):
     i = 1
     m_ = m + mp
@@ -100,6 +103,7 @@ def vfpcwr(n, Pr, C, m, mp_, rhoH):
         i = i + 1
     return(v)
 
+@cache
 def vfpwr_(n, Pr, m, mp_, rhoH):
     i = 1
     m_ = m + mp_
@@ -112,6 +116,7 @@ def vfpwr_(n, Pr, m, mp_, rhoH):
         i = i + 1
     return(v)
 
+@cache
 def hvfpwr_(n, Pr, m, mp_, rhoH):
     i = 1
     m_ = m + mp_
@@ -164,6 +169,7 @@ def howr_(n, m, mp_, rhoH, Pr):
         i = i + 1
     return(ho)
 
+@cache
 def high(vfp, dt, m, mp, tp, fp):
     t = tp
     h = ho_(n, m, mp, tp, fp)
@@ -175,6 +181,7 @@ def high(vfp, dt, m, mp, tp, fp):
         t = t + dt
     return(H)
 
+@cache
 def highwr(vfp, dt, m, mp_, rhoH, Pr):
     tpwr = (mp_/rhoH)/(np.sqrt(2*Pr/rhoH)*np.pi*((r/2)**2))
     t = tpwr
@@ -229,6 +236,7 @@ def speedwr(vfp, dt, m, mp_, rhoH, Pr):
         t = t + dt
     return(V)
 
+@cache
 def hmax(m, mp, tp):
     H = []
     VFP = []
@@ -250,6 +258,7 @@ def hmax(m, mp, tp):
     #ui.label_7.setText("")
     return(R)
 
+@cache
 def hmaxwr(m, mp_, rhoH):
     H = []
     VFP = []
@@ -304,6 +313,7 @@ def highCwr(n, m, mp_, rhoH, Pr):
     return(R)
 
 
+@cache
 def fuseeinator_run(m, mp, tp, fp):
     n = 100000
     dt = 1/n
@@ -373,7 +383,7 @@ def fuseeinator_run(m, mp, tp, fp):
     ax5.set_ylim([0, ymax + 50])
     ax5.scatter(zo[int(len(zo)/2)], h_[int(len(h_)/2)], color = 'green')
     ax5.set_title("time = {}" .format(t_[int(len(h_)/2)]))
-
+    plt.tight_layout()
     plt.show()
 
         #if i + 2 == len(h_):
@@ -381,6 +391,7 @@ def fuseeinator_run(m, mp, tp, fp):
 
         #i = i + 1
         #plt.pause(dt)
+
 
 def waterrocket_run(m, mp_, rhoH, Pr):
     n = 100000
@@ -453,7 +464,7 @@ def waterrocket_run(m, mp_, rhoH, Pr):
     ax5.set_ylim([0, ymax + 50])
     ax5.scatter(zo[int(len(zo)/2)], h_[int(len(h_)/2)], color = 'green')
     ax5.set_title("time = {}" .format(t_[int(len(h_)/2)]))
-
+    plt.tight_layout()
     plt.show()
 
         #if i + 2 == len(h_):
@@ -630,8 +641,9 @@ class Ui_MainWindow(object):
         self.actiongit_push.setObjectName("actiongit_push")
         self.actiongit_push.triggered.connect(lambda: self.git_push())
 
-        self.actionLoad_File = QtWidgets.QAction(MainWindow)
-        self.actionLoad_File.setObjectName("actionLoad_File")
+        self.actionSave_Figure = QtWidgets.QAction(MainWindow)
+        self.actionSave_Figure.setObjectName("actionSave_Figure")
+        self.actionSave_Figure.triggered.connect(lambda: plt.savefig("figure_fuseeinator_{}.png".format(time.time())))
 
         self.actionExit = QtWidgets.QAction(MainWindow)
         self.actionExit.setObjectName("actionExit")
@@ -644,7 +656,7 @@ class Ui_MainWindow(object):
         self.menuSettings.addAction(self.actionupdate)
         self.menuSettings.addAction(self.actiongit_push)
         self.menuSettings.addSeparator()
-        self.menuSettings.addAction(self.actionLoad_File)
+        self.menuSettings.addAction(self.actionSave_Figure)
         self.menuSettings.addAction(self.actionExit)
         self.menuSettings.addSeparator()
         self.menuSettings.addAction(self.actionExit_2)
@@ -657,6 +669,7 @@ class Ui_MainWindow(object):
         _translate = QtCore.QCoreApplication.translate
         MainWindow.setWindowTitle(_translate("MainWindow", "Fuseeinator"))
         self.RunButton.setText(_translate("MainWindow", "RUN"))
+        self.RunButton.setShortcut(_translate("MainWindow", "e, e"))
         self.label.setText(_translate("MainWindow", "Propergol Rocket"))
         self.label_2.setText(_translate("MainWindow", "Type"))
         self.label_3.setText(_translate("MainWindow", "empty mass"))
@@ -673,10 +686,13 @@ class Ui_MainWindow(object):
         self.actiongit_push.setText(_translate("MainWindow", "git push"))
         self.actiongit_push.setStatusTip(_translate("MainWindow", "push to the github repository your parametters"))
         self.actiongit_push.setShortcut(_translate("MainWindow", "Ctrl+P"))
-        self.actionLoad_File.setText(_translate("MainWindow", "Load File"))
-        self.actionLoad_File.setStatusTip(_translate("MainWindow", "Load a File for setting (not yet implemented)"))
+        self.actionSave_Figure.setText(_translate("MainWindow", "Save Figure"))
+        self.actionSave_Figure.setShortcut(_translate("MainWindow", "Ctrl+R, Ctrl+F"))
+        self.actionSave_Figure.setStatusTip(_translate("MainWindow", "When the plot is displayed, hit this button to save the figure"))
         self.actionExit.setText(_translate("MainWindow", "Install Packages"))
+        self.actionExit.setShortcut(_translate("MainWindow", "Ctrl+i, Ctrl+p"))
         self.actionExit_2.setText(_translate("MainWindow", "Exit"))
+        self.actionExit_2.setShortcut(_translate("MainWindow", "Escape, Escape"))
 
     def Run(self):
         self.label_7.setText("...")
@@ -701,13 +717,15 @@ class Ui_MainWindow(object):
                 mp = 1
                 fp = 500
                 tp = 1
+                Cz = 0.6
                 fuseeinator_run(m, mp, tp, fp)
                 self.label_7.setText(" . ")
             if self.comboBox.currentIndex() == 1:
-                m = 1
+                m = 0.8
                 mp_ = 1
                 rhoH = 1000
-                Pr = 60000
+                Pr = 600000
+                Cz = 0.7
                 waterrocket_run(m, mp_, rhoH, Pr)
                 self.label_7.setText(" . ")
 
@@ -730,19 +748,24 @@ class Ui_MainWindow(object):
             type = 1
 
     def git_pull(self):
+        sys.path.append('/position_calculation')
         os.startfile("git_pull.bat")
+        sys.path.append('/..')
 
     def git_push(self):
+        sys.path.append('/position_calculation')
         os.startfile("git_push.bat")
+        sys.path.append('/..')
 
     def install_packages(self):
+        sys.path.append('/position_calculation')
         os.startfile("packages.bat")
+        sys.path.append('/..')
 
     def exit(self):
         sys.exit(app.exec_())
 
 if __name__ == "__main__":
-    import sys
     app = QtWidgets.QApplication(sys.argv)
     MainWindow = QtWidgets.QMainWindow()
     ui = Ui_MainWindow()
