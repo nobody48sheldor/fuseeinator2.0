@@ -748,19 +748,13 @@ class Ui_MainWindow(object):
             type = 1
 
     def git_pull(self):
-        sys.path.append('/position_calculation')
-        os.startfile("git_pull.bat")
-        sys.path.append('/..')
+        os.startfile("position_calculation\git_pull.bat")
 
     def git_push(self):
-        sys.path.append('/position_calculation')
-        os.startfile("git_push.bat")
-        sys.path.append('/..')
+        os.startfile("position_calculation\git_push.bat")
 
     def install_packages(self):
-        sys.path.append('/position_calculation')
-        os.startfile("packages.bat")
-        sys.path.append('/..')
+        os.startfile("position_calculation\packages.bat")
 
     def exit(self):
         sys.exit(app.exec_())
