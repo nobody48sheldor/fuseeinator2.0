@@ -1,3 +1,6 @@
+# FUCK THIS
+se basically after nearly 2 years working on this project, and being about to finnaly test and build this rocket, my parent, which I have been telling all about this project the whole time, just fucking decided to forbide me to do any test what so ever and building the rocket. Pretty much everyone that I know was aware of this project even my highschool which was about to lend me a class and make poster to make people want to help me, but COVID came. Anyway, the only people that were not actually listening to me were my parrents... .
+
 # FUSEEINATOR 🚀
 to infinity and beyond ! 🚀
 ## introduction
